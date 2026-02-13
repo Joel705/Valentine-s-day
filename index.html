@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ximenita ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#ff4d6d;
+--secondary:#ff8fa3;
+--bg:linear-gradient(135deg,#fff0f3,#ffe5ec);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:"Quicksand",sans-serif;
+background:var(--bg);
+display:flex;
+flex-direction:column;
+align-items:center;
+min-height:100vh;
+}
+
+/* CARD */
+
+.card{
+background:white;
+border-radius:25px;
+padding:2rem;
+margin:30px 10px;
+max-width:450px;
+width:95%;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.1);
+}
+
+h1{
+font-family:"Great Vibes",cursive;
+color:var(--primary);
+font-size:2.5rem;
+}
+
+.btn{
+padding:14px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,var(--primary),var(--secondary));
+color:white;
+font-weight:700;
+cursor:pointer;
+width:100%;
+margin-top:10px;
+}
+
+.step{display:none}
+.step.active{display:block}
+
+.sorpresa{
+display:none;
+flex-direction:column;
+gap:30px;
+width:95%;
+max-width:900px;
+}
+
+iframe{
+width:100%;
+height:520px;
+border:none;
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+/* SOBRE */
+
+.sobre-container{
+display:none;
+margin:80px auto;
+perspective:1400px;
+}
+
+.sobre{
+width:380px;
+height:250px;
+position:relative;
+margin:auto;
+cursor:pointer;
+animation:flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+/* CORAZON */
+
+.corazon{
+position:absolute;
+top:-45px;
+left:50%;
+transform:translateX(-50%);
+font-size:45px;
+animation:latido 1.2s infinite, flotarCorazon 3s ease-in-out infinite;
+z-index:10;
+}
+
+@keyframes latido{
+0%,100%{transform:translateX(-50%) scale(1)}
+50%{transform:translateX(-50%) scale(1.2)}
+}
+
+@keyframes flotarCorazon{
+0%,100%{top:-45px}
+50%{top:-55px}
+}
+
+/* BASE */
+
+.base{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(#ff8fa3,#ff758f);
+border-radius:12px;
+box-shadow:
+0 25px 35px rgba(0,0,0,.25),
+inset 0 -15px 20px rgba(0,0,0,.2);
+}
+
+.pliegue-izq,
+.pliegue-der{
+position:absolute;
+width:50%;
+height:100%;
+top:0;
+background:#ff6b88;
+}
+
+.pliegue-izq{
+left:0;
+clip-path:polygon(0 0,100% 50%,0 100%);
+}
+
+.pliegue-der{
+right:0;
+clip-path:polygon(100% 0,0 50%,100% 100%);
+}
+
+/* TAPA */
+
+.tapa{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(#ff4d6d,#ff2e5f);
+clip-path:polygon(0 0,100% 0,50% 65%);
+transform-origin:top;
+transition:1.2s;
+z-index:5;
+}
+
+/* PAPEL */
+
+.papel{
+position:absolute;
+left:20px;
+top:20px;
+width:340px;
+max-height:0;
+background:linear-gradient(#fff,#fff7f7);
+border-radius:10px;
+overflow-y:auto;
+transition:1.4s;
+padding:0 25px;
+box-shadow:0 25px 40px rgba(0,0,0,.3);
+}
+
+.sobre.abierto .tapa{
+transform:rotateX(180deg);
+}
+
+.sobre.abierto .papel{
+max-height:440px;
+padding:30px 25px;
+animation:brillo .8s ease;
+}
+
+@keyframes brillo{
+0%{filter:brightness(1)}
+50%{filter:brightness(1.3)}
+100%{filter:brightness(1)}
+}
+
+/* TEXTO */
+
+.papel h3{
+font-family:"Great Vibes",cursive;
+color:#ff4d6d;
+font-size:2.3rem;
+margin-bottom:15px;
+}
+
+.papel p{
+margin-bottom:15px;
+line-height:1.6;
+color:#444;
+}
+
+@media(max-width:500px){
+
+iframe{height:400px}
+
+.sobre{
+width:310px;
+height:220px;
+}
+
+.papel{
+width:270px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="step active" id="step1">
+<h1>Hola Ximena ❤️</h1>
+<button class="btn" onclick="nextStep(2)">Siguiente</button>
+</div>
+
+<div class="step" id="step2">
+<h1>Para ti...</h1>
+<button class="btn" onclick="nextStep(3)">Continúa</button>
+</div>
+
+<div class="step" id="step3">
+<h1>Mi lugar feliz</h1>
+<button class="btn" onclick="nextStep(4)">Más...</button>
+</div>
+
+<div class="step" id="step4">
+<h1>Un pequeño detalle 🌹</h1>
+<button class="btn" onclick="mostrarSorpresa()">Ver sorpresa</button>
+</div>
+
+</div>
+
+<div class="sorpresa" id="sorpresa">
+<iframe src="parte1.html"></iframe>
+<iframe src="rosa.html"></iframe>
+<button class="btn" onclick="mostrarCarta()">Abrir cartita 💌</button>
+</div>
+
+<div class="sobre-container" id="carta">
+
+<div class="sobre" id="sobre" onclick="toggleSobre()">
+
+<div class="corazon">❤️</div>
+
+<div class="base"></div>
+<div class="pliegue-izq"></div>
+<div class="pliegue-der"></div>
+<div class="tapa"></div>
+
+<div class="papel">
+
+<h3>Para ti ❤️</h3>
+
+<div class="carta-texto">
+
+<p>
+Quiero escribirte algo sin rodeos y sin palabras complicadas… porque lo que representas en mi vida es demasiado real como para esconderlo detrás de frases exageradas.
+</p>
+
+<p>
+Hoy puedo decir que te volviste una parte importante de mis días. No por cosas enormes ni momentos de película… sino por las pláticas, por las risas, por cómo apareces en mi mente incluso cuando estoy haciendo cualquier cosa. Y aunque parezca algo pequeño, para mí tiene muchísimo peso.
+</p>
+
+<p>
+Te convertiste en alguien que suma, que cambia mi ánimo sin esfuerzo y que hace que los días normales se sientan distintos. Porque no todo el mundo tiene ese efecto… pero tú sí. Y lo haces sin darte cuenta.
+</p>
+
+<p>
+Lo que más valoro es que contigo puedo ser yo mismo. Sin filtros, sin actuar diferente, sin tratar de impresionar. Puedo ser real… y aun así sentirme querido. Y eso, hoy en día, vale más que cualquier promesa bonita o cualquier historia perfecta.
+</p>
+
+<p>
+También representas crecimiento para mí. Porque desde que estás presente, pienso distinto, siento más y veo muchas cosas con otra claridad. No llegaste a hacer ruido ni a cambiarlo todo de golpe… pero poco a poco te fuiste volviendo parte esencial de lo que soy ahora.
+</p>
+
+<p>
+No digo que todo sea perfecto… porque lo real nunca lo es. Pero incluso con eso, contigo todo se siente auténtico, sincero y valioso. Y eso es algo que no cambiaría por nada.
+</p>
+
+<p>
+Hoy representas compañía, confianza, emoción… pero sobre todo representas a la persona con la que quiero seguir compartiendo momentos reales, conversaciones largas, tonterías, risas y todo lo que venga después.
+</p>
+
+<p style="font-weight:bold; font-size:1.2em; text-align:center; margin-top:20px;">
+…y si tuviera que resumir todo lo que siento en una sola frase sería esta:<br><br>
+no sé cómo lo hiciste, pero te volviste mi lugar favorito sin darme cuenta…<br><br>
+❤️ lov u vieja ❤️
+</p>
+
+</div>
+
+
+<button class="btn" onclick="location.reload()">Ver otra vez 🔄</button>
+
+</div>
+</div>
+</div>
+
+<script>
+
+function nextStep(id){
+document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));
+document.getElementById("step"+id).classList.add("active");
+}
+
+function mostrarSorpresa(){
+let s=document.getElementById("sorpresa");
+s.style.display="flex";
+s.scrollIntoView({behavior:"smooth"});
+}
+
+function mostrarCarta(){
+let c=document.getElementById("carta");
+c.style.display="block";
+c.scrollIntoView({behavior:"smooth"});
+}
+
+function toggleSobre(){
+document.getElementById("sobre").classList.toggle("abierto");
+}
+
+</script>
+
+</body>
+</html>
