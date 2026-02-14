@@ -98,8 +98,6 @@ animation:flotar 4s ease-in-out infinite;
 50%{transform:translateY(-10px)}
 }
 
-/* CORAZON */
-
 .corazon{
 position:absolute;
 top:-45px;
@@ -119,8 +117,6 @@ z-index:10;
 0%,100%{top:-45px}
 50%{top:-55px}
 }
-
-/* BASE */
 
 .base{
 position:absolute;
@@ -152,8 +148,6 @@ right:0;
 clip-path:polygon(100% 0,0 50%,100% 100%);
 }
 
-/* TAPA */
-
 .tapa{
 position:absolute;
 width:100%;
@@ -164,8 +158,6 @@ transform-origin:top;
 transition:1.2s;
 z-index:5;
 }
-
-/* PAPEL */
 
 .papel{
 position:absolute;
@@ -186,7 +178,7 @@ transform:rotateX(180deg);
 }
 
 .sobre.abierto .papel{
-max-height:440px;
+max-height:520px;
 padding:30px 25px;
 animation:brillo .8s ease;
 }
@@ -210,6 +202,53 @@ margin-bottom:15px;
 margin-bottom:15px;
 line-height:1.6;
 color:#444;
+}
+
+/* ANIMACION PERFECTA */
+
+.palabra-perfecta{
+margin-top:25px;
+font-size:2.2rem;
+font-weight:bold;
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.elemento{
+opacity:0;
+transform:translateY(20px) scale(.7);
+padding:10px 14px;
+border-radius:10px;
+background:#ffe5ec;
+color:#ff2e5f;
+animation:aparecer .6s forwards;
+}
+
+.elemento:nth-child(1){animation-delay:.4s}
+.elemento:nth-child(2){animation-delay:1s}
+.elemento:nth-child(3){animation-delay:1.6s}
+.elemento:nth-child(4){animation-delay:2.2s}
+.elemento:nth-child(5){animation-delay:2.8s}
+
+@keyframes aparecer{
+to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.resultado{
+width:100%;
+text-align:center;
+font-size:2.4rem;
+color:#ff2e5f;
+opacity:0;
+margin-top:10px;
+animation:revelar 1s forwards;
+animation-delay:3.6s;
+}
+
+@keyframes revelar{
+to{opacity:1;letter-spacing:3px}
 }
 
 @media(max-width:500px){
@@ -279,33 +318,7 @@ width:270px;
 
 <div class="carta-texto">
 
-<p>
-Quiero escribirte algo sin rodeos y sin palabras complicadas… porque lo que representas en mi vida es demasiado real como para esconderlo detrás de frases exageradas.
-</p>
-
-<p>
-Hoy puedo decir que te volviste una parte importante de mis días. No por cosas enormes ni momentos de película… sino por las pláticas, por las risas, por cómo apareces en mi mente incluso cuando estoy haciendo cualquier cosa. Y aunque parezca algo pequeño, para mí tiene muchísimo peso.
-</p>
-
-<p>
-Te convertiste en alguien que suma, que cambia mi ánimo sin esfuerzo y que hace que los días normales se sientan distintos. Porque no todo el mundo tiene ese efecto… pero tú sí. Y lo haces sin darte cuenta.
-</p>
-
-<p>
-Lo que más valoro es que contigo puedo ser yo mismo. Sin filtros, sin actuar diferente, sin tratar de impresionar. Puedo ser real… y aun así sentirme querido. Y eso, hoy en día, vale más que cualquier promesa bonita o cualquier historia perfecta.
-</p>
-
-<p>
-También representas crecimiento para mí. Porque desde que estás presente, pienso distinto, siento más y veo muchas cosas con otra claridad. No llegaste a hacer ruido ni a cambiarlo todo de golpe… pero poco a poco te fuiste volviendo parte esencial de lo que soy ahora.
-</p>
-
-<p>
-No digo que todo sea perfecto… porque lo real nunca lo es. Pero incluso con eso, contigo todo se siente auténtico, sincero y valioso. Y eso es algo que no cambiaría por nada.
-</p>
-
-<p>
-Hoy representas compañía, confianza, emoción… pero sobre todo representas a la persona con la que quiero seguir compartiendo momentos reales, conversaciones largas, tonterías, risas y todo lo que venga después.
-</p>
+<p>Quiero escribirte algo sin rodeos...</p>
 
 <p style="font-weight:bold; font-size:1.2em; text-align:center; margin-top:20px;">
 …y si tuviera que resumir todo lo que siento en una sola frase sería esta:<br><br>
@@ -313,8 +326,16 @@ no sé cómo lo hiciste, pero te volviste mi lugar favorito sin darme cuenta…<
 ❤️ lov u vieja ❤️
 </p>
 
+<div class="palabra-perfecta">
+<span class="elemento">P</span>
+<span class="elemento">Er</span>
+<span class="elemento">Fe</span>
+<span class="elemento">C</span>
+<span class="elemento">Ta</span>
+<div class="resultado">PERFECTA</div>
 </div>
 
+</div>
 
 <button class="btn" onclick="location.reload()">Ver otra vez 🔄</button>
 
