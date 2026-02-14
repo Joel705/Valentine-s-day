@@ -24,9 +24,10 @@ display:flex;
 flex-direction:column;
 align-items:center;
 min-height:100vh;
+overflow-x:hidden;
 }
 
-/* CARD */
+/* CARD ORIGINAL */
 
 .card{
 background:white;
@@ -76,87 +77,61 @@ border-radius:20px;
 box-shadow:0 15px 30px rgba(0,0,0,.15);
 }
 
-/* SOBRE */
+/* SOBRE MEJORADO */
 
 .sobre-container{
 display:none;
 margin:80px auto;
-perspective:1400px;
+perspective:1600px;
+position:relative;
+}
+
+.corazon-bg{
+position:absolute;
+font-size:120px;
+opacity:.12;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+animation:latido 2s infinite;
+}
+
+@keyframes latido{
+0%,100%{transform:translate(-50%,-50%) scale(1);}
+50%{transform:translate(-50%,-50%) scale(1.15);}
 }
 
 .sobre{
 width:380px;
-height:250px;
+height:260px;
 position:relative;
 margin:auto;
 cursor:pointer;
-animation:flotar 4s ease-in-out infinite;
-}
-
-@keyframes flotar{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-}
-
-.corazon{
-position:absolute;
-top:-45px;
-left:50%;
-transform:translateX(-50%);
-font-size:45px;
-animation:latido 1.2s infinite, flotarCorazon 3s ease-in-out infinite;
-z-index:10;
-}
-
-@keyframes latido{
-0%,100%{transform:translateX(-50%) scale(1)}
-50%{transform:translateX(-50%) scale(1.2)}
-}
-
-@keyframes flotarCorazon{
-0%,100%{top:-45px}
-50%{top:-55px}
+transform-style:preserve-3d;
+transition:1s;
 }
 
 .base{
 position:absolute;
 width:100%;
 height:100%;
-background:linear-gradient(#ff8fa3,#ff758f);
-border-radius:12px;
-box-shadow:
-0 25px 35px rgba(0,0,0,.25),
-inset 0 -15px 20px rgba(0,0,0,.2);
-}
-
-.pliegue-izq,
-.pliegue-der{
-position:absolute;
-width:50%;
-height:100%;
-top:0;
-background:#ff6b88;
-}
-
-.pliegue-izq{
-left:0;
-clip-path:polygon(0 0,100% 50%,0 100%);
-}
-
-.pliegue-der{
-right:0;
-clip-path:polygon(100% 0,0 50%,100% 100%);
+background:#ff4d6d;
+border-radius:14px;
+box-shadow:0 25px 50px rgba(0,0,0,.35), inset 0 -10px 15px rgba(0,0,0,.2);
 }
 
 .tapa{
 position:absolute;
 width:100%;
 height:100%;
-background:linear-gradient(#ff4d6d,#ff2e5f);
-clip-path:polygon(0 0,100% 0,50% 65%);
+background:#ff758f;
+clip-path:polygon(0 0,100% 0,50% 70%);
 transform-origin:top;
-transition:1.2s;
-z-index:5;
+transition:1s;
+}
+
+.sobre.abierto .tapa{
+transform:rotateX(-180deg);
 }
 
 .papel{
@@ -173,10 +148,6 @@ padding:0 25px;
 box-shadow:0 25px 40px rgba(0,0,0,.3);
 }
 
-.sobre.abierto .tapa{
-transform:rotateX(180deg);
-}
-
 .sobre.abierto .papel{
 max-height:520px;
 padding:30px 25px;
@@ -189,13 +160,12 @@ animation:brillo .8s ease;
 100%{filter:brightness(1)}
 }
 
-/* TEXTO */
-
 .papel h3{
 font-family:"Great Vibes",cursive;
 color:#ff4d6d;
 font-size:2.3rem;
 margin-bottom:15px;
+text-align:center;
 }
 
 .papel p{
@@ -204,66 +174,69 @@ line-height:1.6;
 color:#444;
 }
 
-/* ANIMACION PERFECTA */
+/* ELEMENTOS */
 
-.palabra-perfecta{
-margin-top:25px;
-font-size:2.2rem;
-font-weight:bold;
+.elementos{
 display:flex;
 justify-content:center;
-gap:10px;
 flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
 }
 
 .elemento{
-opacity:0;
-transform:translateY(20px) scale(.7);
-padding:10px 14px;
-border-radius:10px;
+width:70px;
+height:80px;
 background:#ffe5ec;
-color:#ff2e5f;
-animation:aparecer .6s forwards;
-}
-
-.elemento:nth-child(1){animation-delay:.4s}
-.elemento:nth-child(2){animation-delay:1s}
-.elemento:nth-child(3){animation-delay:1.6s}
-.elemento:nth-child(4){animation-delay:2.2s}
-.elemento:nth-child(5){animation-delay:2.8s}
-
-@keyframes aparecer{
-to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-.resultado{
-width:100%;
-text-align:center;
-font-size:2.4rem;
-color:#ff2e5f;
+border-radius:10px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 opacity:0;
-margin-top:10px;
-animation:revelar 1s forwards;
-animation-delay:3.6s;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
 }
 
-@keyframes revelar{
-to{opacity:1;letter-spacing:3px}
+.animar .p{animation:animP .8s forwards .5s;}
+.animar .er{animation:animEr .8s forwards 1.5s;}
+.animar .fe{animation:animFe .8s forwards 2.5s;}
+.animar .c{animation:animC .8s forwards 3.5s;}
+.animar .ta{animation:animTa .8s forwards 4.5s;}
+
+@keyframes animP{to{opacity:1;transform:scale(1);}}
+@keyframes animEr{0%{transform:translateY(-60px);}100%{opacity:1;transform:translateY(0);}}
+@keyframes animFe{0%{transform:rotate(180deg);}100%{opacity:1;transform:rotate(0);}}
+@keyframes animC{0%{transform:scale(2);}100%{opacity:1;transform:scale(1);}}
+@keyframes animTa{0%{transform:translateX(60px);}100%{opacity:1;transform:translateX(0);}}
+
+.palabra{
+text-align:center;
+font-size:28px;
+margin-top:20px;
+letter-spacing:6px;
+opacity:0;
+color:#ff2e5f;
 }
 
-@media(max-width:500px){
-
-iframe{height:400px}
-
-.sobre{
-width:310px;
-height:220px;
+.animar .palabra{
+animation:aparecerPalabra 1s forwards 6s;
 }
 
-.papel{
-width:270px;
+@keyframes aparecerPalabra{
+100%{opacity:1;transform:scale(1.15);}
 }
 
+/* PARTICULAS */
+
+.particula{
+position:absolute;
+font-size:22px;
+animation:flotar linear infinite;
+}
+
+@keyframes flotar{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-100vh);}
 }
 
 </style>
@@ -271,8 +244,9 @@ width:270px;
 
 <body>
 
-<div class="card">
+<!-- TODO TU FLUJO ORIGINAL CONSERVADO -->
 
+<div class="card">
 <div class="step active" id="step1">
 <h1>Hola Ximena ❤️</h1>
 <button class="btn" onclick="nextStep(2)">Siguiente</button>
@@ -292,7 +266,6 @@ width:270px;
 <h1>Un pequeño detalle 🌹</h1>
 <button class="btn" onclick="mostrarSorpresa()">Ver sorpresa</button>
 </div>
-
 </div>
 
 <div class="sorpresa" id="sorpresa">
@@ -301,24 +274,35 @@ width:270px;
 <button class="btn" onclick="mostrarCarta()">Abrir cartita 💌</button>
 </div>
 
+<!-- SOBRE -->
+
 <div class="sobre-container" id="carta">
 
+<div class="corazon-bg">❤️</div>
+
 <div class="sobre" id="sobre" onclick="toggleSobre()">
-
-<div class="corazon">❤️</div>
-
 <div class="base"></div>
-<div class="pliegue-izq"></div>
-<div class="pliegue-der"></div>
 <div class="tapa"></div>
 
 <div class="papel">
-
-<h3>Para ti ❤️</h3>
+<h3>Ximenita...</h3>
 
 <div class="carta-texto">
 
-<p>Quiero escribirte algo sin rodeos...</p>
+<!-- TODA TU CARTA ORIGINAL -->
+<p>Quiero escribirte algo sin rodeos y sin palabras complicadas… porque lo que representas en mi vida es demasiado real como para esconderlo detrás de frases exageradas.</p>
+
+<p>Hoy puedo decir que te volviste una parte importante de mis días. No por cosas enormes ni momentos de película… sino por las pláticas, por las risas, por cómo apareces en mi mente incluso cuando estoy haciendo cualquier cosa. Y aunque parezca algo pequeño, para mí tiene muchísimo peso.</p>
+
+<p>Te convertiste en alguien que suma, que cambia mi ánimo sin esfuerzo y que hace que los días normales se sientan distintos. Porque no todo el mundo tiene ese efecto… pero tú sí. Y lo haces sin darte cuenta.</p>
+
+<p>Lo que más valoro es que contigo puedo ser yo mismo. Sin filtros, sin actuar diferente, sin tratar de impresionar. Puedo ser real… y aun así sentirme querido. Y eso, hoy en día, vale más que cualquier promesa bonita o cualquier historia perfecta.</p>
+
+<p>También representas crecimiento para mí. Porque desde que estás presente, pienso distinto, siento más y veo muchas cosas con otra claridad. No llegaste a hacer ruido ni a cambiarlo todo de golpe… pero poco a poco te fuiste volviendo parte esencial de lo que soy ahora.</p>
+
+<p>No digo que todo sea perfecto… porque lo real nunca lo es. Pero incluso con eso, contigo todo se siente auténtico, sincero y valioso. Y eso es algo que no cambiaría por nada.</p>
+
+<p>Hoy representas compañía, confianza, emoción… pero sobre todo representas a la persona con la que quiero seguir compartiendo momentos reales, conversaciones largas, tonterías, risas y todo lo que venga después.</p>
 
 <p style="font-weight:bold; font-size:1.2em; text-align:center; margin-top:20px;">
 …y si tuviera que resumir todo lo que siento en una sola frase sería esta:<br><br>
@@ -326,14 +310,17 @@ no sé cómo lo hiciste, pero te volviste mi lugar favorito sin darme cuenta…<
 ❤️ lov u vieja ❤️
 </p>
 
-<div class="palabra-perfecta">
-<span class="elemento">P</span>
-<span class="elemento">Er</span>
-<span class="elemento">Fe</span>
-<span class="elemento">C</span>
-<span class="elemento">Ta</span>
-<div class="resultado">PERFECTA</div>
+<p style="text-align:center;font-weight:bold;">Eres una mezcla de...</p>
+
+<div class="elementos animar" id="elementos">
+<div class="elemento p"><b>P</b><small>Fósforo</small></div>
+<div class="elemento er"><b>Er</b><small>Erbio</small></div>
+<div class="elemento fe"><b>Fe</b><small>Hierro</small></div>
+<div class="elemento c"><b>C</b><small>Carbono</small></div>
+<div class="elemento ta"><b>Ta</b><small>Tantalio</small></div>
 </div>
+
+<div class="palabra">PERFECTA</div>
 
 </div>
 
@@ -363,7 +350,25 @@ c.scrollIntoView({behavior:"smooth"});
 }
 
 function toggleSobre(){
-document.getElementById("sobre").classList.toggle("abierto");
+let sobre=document.getElementById("sobre");
+let elementos=document.getElementById("elementos");
+
+sobre.classList.toggle("abierto");
+
+elementos.classList.remove("animar");
+void elementos.offsetWidth;
+elementos.classList.add("animar");
+
+new Audio("https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1530.mp3").play();
+}
+
+for(let i=0;i<30;i++){
+let p=document.createElement("div");
+p.className="particula";
+p.innerHTML="❤️";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(p);
 }
 
 </script>
