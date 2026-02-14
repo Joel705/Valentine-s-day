@@ -12,7 +12,7 @@
 :root{
 --primary:#ff4d6d;
 --secondary:#ff8fa3;
---bg:linear-gradient(135deg,#fff0f3,#ffe5ec);
+--bg:linear-gradient(135deg,#fff0f3,#ffe5ec,#ffb3ba,#ff8fa3);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -20,11 +20,31 @@
 body{
 font-family:"Quicksand",sans-serif;
 background:var(--bg);
+background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+background-size: 20px 20px;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:center;
 min-height:100vh;
 overflow-x:hidden;
+position:relative;
+}
+
+/* Animaciones de fondo */
+@keyframes bubbleUp {
+0% { transform: translateY(100vh) scale(0); opacity: 0; }
+50% { opacity: 1; }
+100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+.bubble {
+position: absolute;
+width: 20px;
+height: 20px;
+background: rgba(255, 77, 109, 0.3);
+border-radius: 50%;
+animation: bubbleUp linear infinite;
 }
 
 /* CARD ORIGINAL */
@@ -38,12 +58,24 @@ max-width:450px;
 width:95%;
 text-align:center;
 box-shadow:0 20px 40px rgba(0,0,0,.1);
+animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+0% { opacity: 0; transform: translateY(50px); }
+100% { opacity: 1; transform: translateY(0); }
 }
 
 h1{
 font-family:"Great Vibes",cursive;
 color:var(--primary);
 font-size:2.5rem;
+animation: typing 2s steps(20, end);
+}
+
+@keyframes typing {
+from { width: 0; }
+to { width: 100%; }
 }
 
 .btn{
@@ -56,10 +88,18 @@ font-weight:700;
 cursor:pointer;
 width:100%;
 margin-top:10px;
+box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+transition: all 0.3s ease;
+border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn:hover {
+transform: scale(1.05);
+box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6), 0 0 20px rgba(255, 77, 109, 0.4);
 }
 
 .step{display:none}
-.step.active{display:block}
+.step.active{display:block; animation: fadeInUp 0.8s ease-out;}
 
 .sorpresa{
 display:none;
@@ -67,6 +107,12 @@ flex-direction:column;
 gap:30px;
 width:95%;
 max-width:900px;
+animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+0% { transform: scale(0.8); opacity: 0; }
+100% { transform: scale(1); opacity: 1; }
 }
 
 iframe{
@@ -75,6 +121,7 @@ height:520px;
 border:none;
 border-radius:20px;
 box-shadow:0 15px 30px rgba(0,0,0,.15);
+animation: fadeIn 1s ease-out 0.5s both;
 }
 
 /* SOBRE MEJORADO */
@@ -84,6 +131,7 @@ display:none;
 margin:80px auto;
 perspective:1600px;
 position:relative;
+animation: fadeInUp 1s ease-out;
 }
 
 .corazon-bg{
@@ -93,12 +141,17 @@ opacity:.12;
 left:50%;
 top:50%;
 transform:translate(-50%,-50%);
-animation:latido 2s infinite;
+animation:latido 2s infinite, pulse 3s infinite;
 }
 
 @keyframes latido{
 0%,100%{transform:translate(-50%,-50%) scale(1);}
 50%{transform:translate(-50%,-50%) scale(1.15);}
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 0.1; }
+50% { opacity: 0.3; }
 }
 
 .sobre{
@@ -109,6 +162,12 @@ margin:auto;
 cursor:pointer;
 transform-style:preserve-3d;
 transition:1s;
+animation: rotateIn 1s ease-out;
+}
+
+@keyframes rotateIn {
+0% { transform: rotateY(-90deg); opacity: 0; }
+100% { transform: rotateY(0); opacity: 1; }
 }
 
 .base{
@@ -172,6 +231,8 @@ text-align:center;
 margin-bottom:15px;
 line-height:1.6;
 color:#444;
+animation: fadeInUp 1s ease-out both;
+animation-delay: calc(var(--i) * 0.5s);
 }
 
 /* ELEMENTOS */
@@ -195,6 +256,12 @@ justify-content:center;
 align-items:center;
 opacity:0;
 box-shadow:0 10px 20px rgba(0,0,0,.2);
+transition: all 0.3s ease;
+}
+
+.elemento:hover {
+transform: scale(1.1);
+box-shadow: 0 15px 30px rgba(0,0,0,.3);
 }
 
 .animar .p{animation:animP .8s forwards .5s;}
@@ -203,11 +270,11 @@ box-shadow:0 10px 20px rgba(0,0,0,.2);
 .animar .c{animation:animC .8s forwards 3.5s;}
 .animar .ta{animation:animTa .8s forwards 4.5s;}
 
-@keyframes animP{to{opacity:1;transform:scale(1);}}
-@keyframes animEr{0%{transform:translateY(-60px);}100%{opacity:1;transform:translateY(0);}}
-@keyframes animFe{0%{transform:rotate(180deg);}100%{opacity:1;transform:rotate(0);}}
-@keyframes animC{0%{transform:scale(2);}100%{opacity:1;transform:scale(1);}}
-@keyframes animTa{0%{transform:translateX(60px);}100%{opacity:1;transform:translateX(0);}}
+@keyframes animP{to{opacity:1;transform:scale(1); filter: brightness(1.2);}}
+@keyframes animEr{0%{transform:translateY(-60px);}100%{opacity:1;transform:translateY(0); filter: brightness(1.2);}}
+@keyframes animFe{0%{transform:rotate(180deg);}100%{opacity:1;transform:rotate(0); filter: brightness(1.2);}}
+@keyframes animC{0%{transform:scale(2);}100%{opacity:1;transform:scale(1); filter: brightness(1.2);}}
+@keyframes animTa{0%{transform:translateX(60px);}100%{opacity:1;transform:translateX(0); filter: brightness(1.2);}}
 
 .palabra{
 text-align:center;
@@ -243,6 +310,18 @@ animation:flotar linear infinite;
 </head>
 
 <body>
+
+<!-- Burbujas de fondo -->
+<script>
+for(let i=0;i<20;i++){
+let b=document.createElement("div");
+b.className="bubble";
+b.style.left=Math.random()*100+"vw";
+b.style.animationDuration=(8+Math.random()*4)+"s";
+b.style.animationDelay=Math.random()*5+"s";
+document.body.appendChild(b);
+}
+</script>
 
 <!-- TODO TU FLUJO ORIGINAL CONSERVADO -->
 
@@ -290,29 +369,29 @@ animation:flotar linear infinite;
 <div class="carta-texto">
 
 <!-- TODA TU CARTA ORIGINAL -->
-<p>Quiero escribirte algo sin rodeos y sin palabras complicadas… porque lo que representas en mi vida es demasiado real como para esconderlo detrás de frases exageradas.</p>
+<p style="--i:1">Quiero escribirte algo sin rodeos y sin palabras complicadas… porque lo que representas en mi vida es demasiado real como para esconderlo detrás de frases exageradas.</p>
 
-<p>Hoy puedo decir que te volviste una parte importante de mis días. No por cosas enormes ni momentos de película… sino por las pláticas, por las risas, por cómo apareces en mi mente incluso cuando estoy haciendo cualquier cosa. Y aunque parezca algo pequeño, para mí tiene muchísimo peso.</p>
+<p style="--i:2">Hoy puedo decir que te volviste una parte importante de mis días. No por cosas enormes ni momentos de película… sino por las pláticas, por las risas, por cómo apareces en mi mente incluso cuando estoy haciendo cualquier cosa. Y aunque parezca algo pequeño, para mí tiene muchísimo peso.</p>
 
-<p>Te convertiste en alguien que suma, que cambia mi ánimo sin esfuerzo y que hace que los días normales se sientan distintos. Porque no todo el mundo tiene ese efecto… pero tú sí. Y lo haces sin darte cuenta.</p>
+<p style="--i:3">Te convertiste en alguien que suma, que cambia mi ánimo sin esfuerzo y que hace que los días normales se sientan distintos. Porque no todo el mundo tiene ese efecto… pero tú sí. Y lo haces sin darte cuenta.</p>
 
-<p>Lo que más valoro es que contigo puedo ser yo mismo. Sin filtros, sin actuar diferente, sin tratar de impresionar. Puedo ser real… y aun así sentirme querido. Y eso, hoy en día, vale más que cualquier promesa bonita o cualquier historia perfecta.</p>
+<p style="--i:4">Lo que más valoro es que contigo puedo ser yo mismo. Sin filtros, sin actuar diferente, sin tratar de impresionar. Puedo ser real… y aun así sentirme querido. Y eso, hoy en día, vale más que cualquier promesa bonita o cualquier historia perfecta.</p>
 
-<p>También representas crecimiento para mí. Porque desde que estás presente, pienso distinto, siento más y veo muchas cosas con otra claridad. No llegaste a hacer ruido ni a cambiarlo todo de golpe… pero poco a poco te fuiste volviendo parte esencial de lo que soy ahora.</p>
+<p style="--i:5">También representas crecimiento para mí. Porque desde que estás presente, pienso distinto, siento más y veo muchas cosas con otra claridad. No llegaste a hacer ruido ni a cambiarlo todo de golpe… pero poco a poco te fuiste volviendo parte esencial de lo que soy ahora.</p>
 
-<p>No digo que todo sea perfecto… porque lo real nunca lo es. Pero incluso con eso, contigo todo se siente auténtico, sincero y valioso. Y eso es algo que no cambiaría por nada.</p>
+<p style="--i:6">No digo que todo sea perfecto… porque lo real nunca lo es. Pero incluso con eso, contigo todo se siente auténtico, sincero y valioso. Y eso es algo que no cambiaría por nada.</p>
 
-<p>Hoy representas compañía, confianza, emoción… pero sobre todo representas a la persona con la que quiero seguir compartiendo momentos reales, conversaciones largas, tonterías, risas y todo lo que venga después.</p>
+<p style="--i:7">Hoy representas compañía, confianza, emoción… pero sobre todo representas a la persona con la que quiero seguir compartiendo momentos reales, conversaciones largas, tonterías, risas y todo lo que venga después.</p>
 
-<p style="font-weight:bold; font-size:1.2em; text-align:center; margin-top:20px;">
+<p style="font-weight:bold; font-size:1.2em; text-align:center; margin-top:20px; --i:8">
 …y si tuviera que resumir todo lo que siento en una sola frase sería esta:<br><br>
 no sé cómo lo hiciste, pero te volviste mi lugar favorito sin darme cuenta…<br><br>
 ❤️ lov u vieja ❤️
 </p>
 
-<p style="text-align:center;font-weight:bold;">Eres una mezcla de...</p>
+<p style="text-align:center;font-weight:bold; --i:9">Eres una mezcla de...</p>
 
-<div class="elementos animar" id="elementos">
+<div class="elementos" id="elementos">
 <div class="elemento p"><b>P</b><small>Fósforo</small></div>
 <div class="elemento er"><b>Er</b><small>Erbio</small></div>
 <div class="elemento fe"><b>Fe</b><small>Hierro</small></div>
@@ -352,22 +431,42 @@ c.scrollIntoView({behavior:"smooth"});
 function toggleSobre(){
 let sobre=document.getElementById("sobre");
 let elementos=document.getElementById("elementos");
+let papel=document.getElementById("papel");
 
 sobre.classList.toggle("abierto");
 
-elementos.classList.remove("animar");
-void elementos.offsetWidth;
-elementos.classList.add("animar");
+if (sobre.classList.contains("abierto")) {
+    // Al abrir, crear observer para activar animación al hacer scroll dentro de la carta
+    if (!elementos.observer) {
+        elementos.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    elementos.classList.add("animar");
+                    elementos.observer.unobserve(elementos);
+                }
+            });
+        }, { root: papel, threshold: 0.1 });
+        elementos.observer.observe(elementos);
+    }
+} else {
+    // Al cerrar, remover animar y desconectar observer
+    elementos.classList.remove("animar");
+    if (elementos.observer) {
+        elementos.observer.disconnect();
+        delete elementos.observer;
+    }
+}
 
 new Audio("https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1530.mp3").play();
 }
 
-for(let i=0;i<30;i++){
+for(let i=0;i<50;i++){
 let p=document.createElement("div");
 p.className="particula";
-p.innerHTML="❤️";
+p.innerHTML=i%2===0 ? "❤️" : "🌸";
 p.style.left=Math.random()*100+"vw";
 p.style.animationDuration=(5+Math.random()*5)+"s";
+p.style.fontSize=(20+Math.random()*10)+"px";
 document.body.appendChild(p);
 }
 
